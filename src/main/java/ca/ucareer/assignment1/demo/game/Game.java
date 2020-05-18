@@ -3,7 +3,7 @@ package ca.ucareer.assignment1.demo.game;
 
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.springframework.data.annotation.Id;
+
 
 import javax.persistence.*;
 import java.util.Date;
@@ -13,14 +13,16 @@ import static javax.persistence.TemporalType.TIMESTAMP;
 // set elements in game
 @Entity//Specifies that the class is an entity.
 public class Game {
+    //id like index
 
     @Id
-    //id like index
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
     private Long id;
     private String label;
     private Date date;
+
+
+
 
     @Temporal(TIMESTAMP)
     @Column(name = "create_at", updatable = false)
