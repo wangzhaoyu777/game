@@ -11,10 +11,8 @@ public class GameService {
 
     final GameRepository gameRepository;//?????
 
-
     @Autowired
     GameRepository repository;//????
-
 
     public GameService(GameRepository gameRepository) {
         //constructor
