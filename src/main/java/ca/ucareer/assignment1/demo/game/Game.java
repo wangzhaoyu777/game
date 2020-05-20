@@ -1,9 +1,7 @@
 package ca.ucareer.assignment1.demo.game;
 
-
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-
 
 import javax.persistence.*;
 import java.util.Date;
@@ -20,9 +18,6 @@ public class Game {
     private Long id;
     private String label;
     private Date date;
-
-
-
 
     @Temporal(TIMESTAMP)
     @Column(name = "create_at", updatable = false)
