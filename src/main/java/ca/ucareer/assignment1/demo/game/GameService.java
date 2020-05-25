@@ -56,10 +56,25 @@ public class GameService {
         return repository.findById(id).orElse(null);
     }
 
-//    public Game update (Long id, Game game) {
-//
-//
-//    }
+
+    public Game update(Long id, Game game) {
+        Game foundOne = repository.getOne(id);
+        if (foundOne != null) {
+            if (game.getLabel() != null && !game.getLabel().isEmpty()) {
+                //null 没有isEmpty,没有任何function
+                foundOne.setLabel(game.getLabel());
+            }
+            if (game.getDate() != null ) {
+                //null 没有isEmpty,没有任何function
+                foundOne.setDate(game.getDate());
+            }
+            return this.repository.save(foundOne);
+        } else {
+            return null;
+        }
+
+    }
+
 
     //controller annotation ?
     public long countNum() {

@@ -17,7 +17,7 @@ public class GameController {
     @Autowired //auto init class(bean) rather than : new Service()
     private GameService gameService;
 
-    @PostMapping("/game")
+    @PostMapping("/games")
     // Annotation for mapping HTTP {CODE: POST} requests onto specific
     // handler method;
     public ResponseEntity<CoreResponseBody> addOne(@RequestBody Game game){
@@ -29,7 +29,7 @@ public class GameController {
         return ResponseEntity.ok(response);//return ??
     }
 
-    @DeleteMapping("/game/{id}")
+    @DeleteMapping("/games/{id}")
     public ResponseEntity<CoreResponseBody> deleteOneById (@PathVariable Long id){
 
         CoreResponseBody response;
@@ -43,7 +43,7 @@ public class GameController {
         }
     }
 
-    @GetMapping("/game")
+    @GetMapping("/games")
     public ResponseEntity<CoreResponseBody> getAll (){
 
         List<Game> results = this.gameService.getAll();
@@ -52,6 +52,16 @@ public class GameController {
         return ResponseEntity.ok(response);
     }
 
+    @PostMapping("/games/{id}")
+    public ResponseEntity<CoreResponseBody> update (@PathVariable Long id,@RequestBody Game game){
+
+        Game results = this.gameService.update(id, game);
+        CoreResponseBody response = new CoreResponseBody(results,null, "");
+
+        return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/games/{id}")
     public ResponseEntity<CoreResponseBody> getOneById (@PathVariable Long id){
         //                                          PathVariable =》｛id｝
 

@@ -2,7 +2,6 @@ package ca.ucareer.assignment1.demo.player;
 
 
 import ca.ucareer.assignment1.demo.core.CoreResponseBody;
-import ca.ucareer.assignment1.demo.game.Game;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,7 +15,7 @@ public class PlayerController {
     @Autowired //auto init class(bean) rather than : new Service()
     private PlayerService playerService;
 
-    @PostMapping("/player")
+    @PostMapping("/players")
     // Annotation for mapping HTTP {CODE: POST} requests onto specific
     // handler method;
     public ResponseEntity<CoreResponseBody> addOne(@RequestBody Player player){
@@ -28,7 +27,7 @@ public class PlayerController {
         return ResponseEntity.ok(response);//return ??
     }
 
-    @DeleteMapping("/player/{id}")
+    @DeleteMapping("/players/{id}")
     public ResponseEntity<CoreResponseBody> deleteOneById (@PathVariable Long id){
 
         CoreResponseBody response;
@@ -42,7 +41,7 @@ public class PlayerController {
         }
     }
 
-    @GetMapping("/player")
+    @GetMapping("/players")
     public ResponseEntity<CoreResponseBody> getAll (){
 
         List<Player> results = this.playerService.getAll();
@@ -51,12 +50,23 @@ public class PlayerController {
         return ResponseEntity.ok(response);
     }
 
+    @GetMapping("/players/{id}")
     public ResponseEntity<CoreResponseBody> getOneById (@PathVariable Long id){
 
         Player result = this.playerService.getOneById(id);
         CoreResponseBody response = new CoreResponseBody(result,null, "");
 
         return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/players/{id}")
+    public ResponseEntity<CoreResponseBody> update (@PathVariable Long id, @RequestBody Player player){
+
+        Player result = this.playerService.update(id,player);
+        CoreResponseBody response = new CoreResponseBody(result, null, "");
+
+        return ResponseEntity.ok(response);
+
     }
 
 

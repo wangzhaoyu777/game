@@ -51,10 +51,25 @@ public class PlayerService {
         return repository.findById(id).orElse(null);
     }
 
+    public Player update (Long id, Player player){
+        Player foundOne = repository.getOne(id);
+        if (foundOne !=null){
+            if(player.getFirstName() !=null && player.getLastName() !=null){
+                foundOne.setFirstName(player.getFirstName());
+                foundOne.setLastName(player.getLastName());
+            }
+            return this.repository.save(foundOne);
+        } else {
+            return null;
+        }
+
+    }
+
     public long countNum() {
         //Returns the number of entities available.
         return repository.count();
     }
+
 
 
 
